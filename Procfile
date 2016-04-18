@@ -1,1 +1,1 @@
-web:    java -cp target/classes:target/dependency/* EventureApplication
+web:    java -cp target/classes:target/dependency/* pl.edu.agh.tai.EventureApplication
