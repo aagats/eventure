@@ -1,1 +1,1 @@
-web:    java -cp target/classes:target/dependency/* pl.edu.agh.tai.EventureApplication
+web: java -Dserver.port=$PORT -jar  target/eventure-0.0.1-SNAPSHOT.jar
