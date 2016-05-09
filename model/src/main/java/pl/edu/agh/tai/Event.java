@@ -90,11 +90,11 @@ public class Event {
         this.observators = observators;
     }
 
-    public void addObservator(CustomUser user) {
+    public void addObservator(User user) {
         observators.add(user);
     }
 
-    public void deleteObservator(CustomUser user) {
+    public void deleteObservator(User user) {
         observators.remove(user);
     }
 
