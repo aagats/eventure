@@ -1,4 +1,4 @@
-package pl.edu.agh.tai.model;
+package pl.edu.agh.tai;
 
 import java.time.LocalDateTime;
 import java.util.List;

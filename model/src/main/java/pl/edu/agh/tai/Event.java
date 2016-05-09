@@ -1,4 +1,4 @@
-package pl.edu.agh.tai.model;
+package pl.edu.agh.tai;
 
 import org.springframework.security.core.userdetails.User;
 
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-class Event {
+public class Event {
 
     private long id;
     private String name;

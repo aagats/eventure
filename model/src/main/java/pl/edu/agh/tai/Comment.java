@@ -1,8 +1,8 @@
-package pl.edu.agh.tai.model;
+package pl.edu.agh.tai;
 
 import java.time.LocalDateTime;
 
-class Comment {
+public class Comment {
 
     private long id;
     private CustomUser author;
