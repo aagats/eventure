@@ -1,7 +1,6 @@
-package pl.edu.agh.tai.model;
+package pl.edu.agh.tai;
 
-
-class Place {
+public class Place {
 
     private long id;
     private String name;

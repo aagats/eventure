@@ -1,4 +1,6 @@
-package pl.edu.agh.tai.model;
+package pl.edu.agh.tai;
+
+import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,10 +11,10 @@ public class Post {
     private Event event;
     private LocalDateTime publishDate;
     private List<Comment> comments;
-    private CustomUser admin;
+    private User admin;
 
 
-    public Post(Event event, LocalDateTime publishDate, long id, List<Comment> comments, CustomUser admin) {
+    public Post(Event event, LocalDateTime publishDate, long id, List<Comment> comments, User admin) {
         this.event = event;
         this.publishDate = publishDate;
         this.id = id;
@@ -52,11 +54,11 @@ public class Post {
         this.comments = comments;
     }
 
-    public CustomUser getAdmin() {
+    public User getAdmin() {
         return admin;
     }
 
-    public void setAdmin(CustomUser admin) {
+    public void setAdmin(User admin) {
         this.admin = admin;
     }
 

@@ -1,4 +1,4 @@
-package pl.edu.agh.tai.model;
+package pl.edu.agh.tai;
 
 import org.springframework.security.core.userdetails.User;
 
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-class Event {
+public class Event {
 
     private long id;
     private String name;
@@ -90,11 +90,11 @@ class Event {
         this.observators = observators;
     }
 
-    public void addObservator(CustomUser user) {
+    public void addObservator(User user) {
         observators.add(user);
     }
 
-    public void deleteObservator(CustomUser user) {
+    public void deleteObservator(User user) {
         observators.remove(user);
     }
 
