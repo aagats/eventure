@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-class Event {
+public class Event {
 
     private long id;
     private String name;
@@ -17,6 +17,8 @@ class Event {
     private boolean tickets;
     private List<User> observators;
 
+    public Event() {
+    }
 
     public Event(long id, String name, Place location, Set<Category> categories, boolean tickets) {
         this.id = id;

@@ -1,13 +1,16 @@
 package pl.edu.agh.tai.model;
 
 
-class Place {
+public class Place {
 
     private long id;
     private String name;
     private String city;
     private String street;
     private int buildingNumber;
+
+    public Place() {
+    }
 
     public Place(long id, String name, String city, String street, int buildingNumber) {
         this.id = id;

@@ -4,7 +4,7 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-class CustomUser extends User {
+public class CustomUser extends User {
 
     private Collection<Role> role;
 

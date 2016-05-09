@@ -2,12 +2,15 @@ package pl.edu.agh.tai.model;
 
 import java.time.LocalDateTime;
 
-class Comment {
+public class Comment {
 
     private long id;
     private CustomUser author;
     private String content;
     private LocalDateTime time;
+
+    public Comment() {
+    }
 
     public Comment(long id, CustomUser author, String content, LocalDateTime time) {
         this.id = id;

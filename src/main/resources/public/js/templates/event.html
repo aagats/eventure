@@ -1,0 +1,8 @@
+<div class="jumbotron">
+    <h1><%= model.get('name') %>  <h3><%=model.get('hashtag')%></h3></h1>
+    <p class="lead">When: <%= model.get('date') ? model.get('date') : 'unknown' %> <br/>
+        Where: <%= model.get('location').get('name') %><br/>
+        Tickets? <%= model.get('tickets') ? 'yup' : 'nope' %>
+    </p>
+    <p><a class="btn btn-lg btn-success" href="#" role="button">Watch</a></p>
+</div>

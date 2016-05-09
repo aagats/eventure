@@ -1,6 +1,6 @@
 package pl.edu.agh.tai.model;
 
-enum Category {
+public enum Category {
     MUSIC,
     SPORT,
     IT,
