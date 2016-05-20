@@ -2,8 +2,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'place',
-    '../collections/users'
+    'models/place',
+    'collections/users'
 ], function($, _, Backbone, Place, Users) {
     var Event = Backbone.Model.extend({
         defaults: {

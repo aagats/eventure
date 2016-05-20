@@ -3,9 +3,9 @@ define([
     'underscore',
     'backbone',
     'text!templates/main-page.html',
-    'text!templates/event.html',
+    'views/event',
     '../collections/events'
-], function($, _, Backbone, mainPageTemplate, eventTemplate, Events){
+], function($, _, Backbone, mainPageTemplate, EventView, Events){
     var MainPageView = Backbone.View.extend({
 
         initialize: function() {
@@ -22,14 +22,15 @@ define([
 
         renderView: function(){
             this.$el.html(_.template(mainPageTemplate));
+            var eventView;
 
-            var toAppend = "";
             this.events.each(function(event) {
-                toAppend += _.template(eventTemplate, {
+                eventView = new EventView({
+                    el: this.$('.event-list'),
                     model: event
                 });
+                eventView.render();
             });
-            this.$('.event-list').append(toAppend);
         }
     });
     return MainPageView;
