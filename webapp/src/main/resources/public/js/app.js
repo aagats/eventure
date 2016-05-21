@@ -8,7 +8,7 @@ define([
     var App = {
         initialize: function () {
             var router = new AppRouter();
-            Backbone.history.start();
+            Backbone.history.start({pushState: true, root: '/'});
         }
     };
 

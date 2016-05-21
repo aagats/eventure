@@ -2,6 +2,7 @@ package tai.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.agh.tai.Event;
 import pl.edu.agh.tai.Place;
@@ -25,8 +26,10 @@ public class HomeController {
     }
 
     @RequestMapping(path="login", method = RequestMethod.GET)
-    public void login(String token) {
-        System.out.println(token);
+    public void login(@RequestParam(value="code") String code) {
+        System.out.println(code);
     }
+
+
 
 }
