@@ -21,6 +21,7 @@ define([
         },
 
         renderView: function(){
+
             this.$el.html(_.template(mainPageTemplate));
             var eventView;
 

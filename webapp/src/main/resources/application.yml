@@ -5,7 +5,8 @@ security:
             clientSecret: d03fab2cd4f8441ab81ee632bf1c38a1
             accessTokenUri: https://api.instagram.com/oauth/access_token
             userAuthorizationUri: https://api.instagram.com/oauth/authorize
-            scope: public_content
             clientAuthenticationScheme: form
+            scope: public_content
+            authenticationScheme: query
         resource:
             userInfoUri: https://api.instagram.com/v1/users/self

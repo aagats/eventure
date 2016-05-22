@@ -5,7 +5,12 @@
         Tickets? <%= model.get('tickets') ? 'yup' : 'nope' %>
     </p>
     <div class="photos">
-
+        <% if (_.isEmpty(photos)) { %>
+            There are no photos for this event.
+        <% } else { %>
+        <% _.forEach(photos, function(photo) { %>
+            <a href="<%= photo.link %>"><img src="<%=photo.images.thumbnail.url %>"></a>
+        <% });} %>
     </div>
     <p><a class="btn btn-lg btn-success" href="#" role="button">Watch</a></p>
 </div>
