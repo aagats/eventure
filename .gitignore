@@ -5,6 +5,7 @@
 .idea/
 /out/
 .idea_modules/
+/db
 
 # JIRA plugin
 atlassian-ide-plugin.xml
