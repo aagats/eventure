@@ -1,4 +1,4 @@
-package pl.edu.agh.tai;
+package tai;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

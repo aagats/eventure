@@ -13,6 +13,8 @@ public class Post {
     private List<Comment> comments;
     private User admin;
 
+    public Post() {
+    }
 
     public Post(Event event, LocalDateTime publishDate, long id, List<Comment> comments, User admin) {
         this.event = event;

@@ -9,6 +9,9 @@ public class Comment {
     private String content;
     private LocalDateTime time;
 
+    public Comment() {
+    }
+
     public Comment(long id, CustomUser author, String content, LocalDateTime time) {
         this.id = id;
         this.author = author;

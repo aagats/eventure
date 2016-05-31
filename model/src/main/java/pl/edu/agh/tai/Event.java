@@ -17,6 +17,8 @@ public class Event {
     private boolean tickets;
     private List<User> observators;
 
+    public Event() {
+    }
 
     public Event(long id, String name, Place location, Set<Category> categories, boolean tickets) {
         this.id = id;
