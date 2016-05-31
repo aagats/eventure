@@ -3,13 +3,13 @@ define([
     'underscore',
     'backbone',
     'views/main-page',
-    'views/login-page'
-], function ($, _, Backbone, MainPageView, LoginPageView) {
+    'views/login-page',
+    'views/event'
+], function ($, _, Backbone, MainPageView, LoginPageView, EventView) {
     var AppRouter = Backbone.Router.extend({
         routes: {
             'events/:id': 'showEvent',
-            'dashboard': 'mainPage',
-            '': 'loginPage'
+            '': 'mainPage'
         },
 
         mainPage: function () {
@@ -19,15 +19,12 @@ define([
             mainPageView.render();
         },
 
-        loginPage: function() {
-            var loginPageView = new LoginPageView({
-                el: $('.main-container')
-            });
-            loginPageView.render();
-        },
-
         showEvent: function(id) {
-            
+            var eventPageView = new EventView({
+                el: $('.main-container'),
+                id: id
+            });
+            eventPageView.render();
             
         }
 

@@ -1,5 +1,6 @@
 package tai;
 
+import org.codehaus.jackson.JsonGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.common.util.Jackson2JsonParser;
+import org.springframework.security.oauth2.common.util.JacksonJsonParser;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,29 +36,16 @@ public class EventureApplication extends WebSecurityConfigurerAdapter {
         http
                 .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/", "/login**")
+                .antMatchers("/", "/login**", "/api/userauth")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
     }
 
-    @RequestMapping("/photos/{tag}")
-    public String user(@PathVariable(value = "tag") String tag, Principal principal) {
-        OAuth2Authentication userInfo = (OAuth2Authentication) principal;
-        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) userInfo.getDetails();
-        String token = details.getTokenValue();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://api.instagram.com/v1/tags/" + tag + "/media/recent")
-                .queryParam("access_token", token);
-
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-
-        RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<String> response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity, String.class);
-
-        return response.getBody();
+    @RequestMapping(path = "/api/userauth")
+    public Boolean isUserLoggedIn(Principal principal) {
+        Boolean isAuth;
+        isAuth = principal != null;
+        return isAuth;
     }
 }

@@ -18,7 +18,7 @@ define([
         },
         
         url: function() {
-            return 'api/events/' + this.get('id');
+            return '/api/events/' + this.get('id');
         },
 
         parse: function(data) {
