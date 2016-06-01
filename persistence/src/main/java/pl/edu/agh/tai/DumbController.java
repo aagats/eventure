@@ -1,10 +1,7 @@
 package pl.edu.agh.tai;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class DumbController {
@@ -13,6 +10,10 @@ public class DumbController {
     private PlaceRepository placeRepository;
     @Autowired
     private EventRepository eventRepository;
+    @Autowired
+    private PostRepository postRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     @RequestMapping(path = "/healthcheck")
     public String lol() {
@@ -31,5 +32,21 @@ public class DumbController {
         //TODO: null pointer exc
         PlaceEntity location = placeRepository.findOne(locationId);
         eventRepository.save(new EventEntity(event.getName(), event.getHashtag(), location, event.getCategories(), event.hasTickets()));
+    }
+
+    @RequestMapping(path = "/posts", method = RequestMethod.POST)
+    public void createPost(@RequestBody PostDto post) {
+        long eventId = post.getEvent();
+        //TODO: null pointer exc
+        EventEntity event = eventRepository.findOne(eventId);
+        postRepository.save(new PostEntity(event));
+    }
+    
+
+    @RequestMapping(path = "/posts/{id}/comments", method = RequestMethod.POST)
+    public void createCommentForPost(@PathVariable(value = "id") long id, @RequestBody CommentDto comment) {
+        long postId = id;
+        PostEntity post = postRepository.findOne(postId);
+        commentRepository.save(new CommentEntity(comment.getContent(), post));
     }
 }

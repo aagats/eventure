@@ -2,9 +2,7 @@ package pl.edu.agh.tai;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.security.core.userdetails.User;
 
-import java.util.List;
 import java.util.Set;
 
 public class EventDto {

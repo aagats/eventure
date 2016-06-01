@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 
 public class EventTest {
 
-    private List<User> observators;
+    private Set<User> observators;
     private User user1mock;
     private User user2mock;
     private Event event;
@@ -24,7 +24,7 @@ public class EventTest {
 
     @Before
     public void setUp() throws Exception {
-        observators = new ArrayList<>();
+        observators = new HashSet<>();
         user1mock = mock(CustomUser.class);
         user2mock = mock(CustomUser.class);
         observators.add(user1mock);
