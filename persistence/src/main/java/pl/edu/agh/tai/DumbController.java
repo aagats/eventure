@@ -21,7 +21,7 @@ public class DumbController {
 
     @RequestMapping(path = "/places", method = RequestMethod.POST)
     public void createPlacePlace(@RequestBody PlaceDto place) {
-        placeRepository.save(new PlaceEntity(place.getName(), "nyc", "wall street", 4));
+        placeRepository.save(new PlaceEntity(place.getName(), place.getCity(), place.getStreet(), place.getBuildingNumber()));
         System.out.println("lol done");
     }
 

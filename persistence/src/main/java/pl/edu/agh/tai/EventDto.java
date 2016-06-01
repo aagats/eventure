@@ -2,17 +2,21 @@ package pl.edu.agh.tai;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.security.core.userdetails.User;
 
+import java.util.List;
 import java.util.Set;
 
 public class EventDto {
     private final String name;
-    //TODO fight jackson annotations to support some exact date format or use DateTimeFormatter manually
+    //TODO: fight jackson annotations to support some exact date format or use DateTimeFormatter manually
 //    private final LocalDateTime date;
     private final String hashtag;
     private final long location;
     private final Set<Category> categories;
     private final boolean tickets;
+    //TODO: observators in db
+//    private final List<CustomUser> observators;
 
     @JsonCreator
     public EventDto(@JsonProperty(value = "name", required = true) String name,
@@ -38,10 +42,6 @@ public class EventDto {
     public long getLocation() {
         return location;
     }
-
-//    public Set<Category> getCategories() {
-//        return categories;
-//    }
 
     public boolean hasTickets() {
         return tickets;
