@@ -1,5 +1,6 @@
 package pl.edu.agh.tai;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ public class Post {
     private Event event;
     private LocalDateTime publishDate;
     private List<Comment> comments;
+    @JsonIgnore
     private User admin;
 
     public Post() {

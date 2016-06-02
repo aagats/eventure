@@ -1,9 +1,11 @@
 package pl.edu.agh.tai;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
+@JsonIgnoreProperties({"password", "authorities", "role"})
 public class CustomUser extends User {
 
     private Collection<Role> role;

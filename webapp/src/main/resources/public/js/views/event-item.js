@@ -6,6 +6,7 @@ define([
     'models/event'
 ], function($, _, Backbone, eventItemTemplate, Event){
     var EventItemView = Backbone.View.extend({
+        
 
         render: function() {
             if (this.model.get('hashtag') !== null) {
@@ -21,7 +22,7 @@ define([
                 instaData = JSON.parse(instaData);
             }
             
-            this.$el.append(_.template(eventItemTemplate, {
+            this.$el.html(_.template(eventItemTemplate, {
                 model: this.model,
                 photos: instaData.data
             }));
