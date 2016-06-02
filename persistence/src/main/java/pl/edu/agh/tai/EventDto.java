@@ -7,8 +7,7 @@ import java.util.Set;
 
 public class EventDto {
     private final String name;
-    //TODO: fight jackson annotations to support some exact date format or use DateTimeFormatter manually
-//    private final LocalDateTime date;
+    private final String dateTime;
     private final String hashtag;
     private final long location;
     private final Set<Category> categories;
@@ -18,11 +17,13 @@ public class EventDto {
 
     @JsonCreator
     public EventDto(@JsonProperty(value = "name", required = true) String name,
+                    @JsonProperty(value = "date") String dateTime,
                     @JsonProperty("hashtag") String hashtag,
                     @JsonProperty("location") long location,
                     @JsonProperty("categories") Set<Category> categories,
                     @JsonProperty("tickets") boolean tickets) {
         this.name = name;
+        this.dateTime = dateTime;
         this.hashtag = hashtag;
         this.location = location;
         this.categories = categories;
@@ -31,6 +32,10 @@ public class EventDto {
 
     public String getName() {
         return name;
+    }
+
+    public String getDateTime() {
+        return dateTime;
     }
 
     public String getHashtag() {

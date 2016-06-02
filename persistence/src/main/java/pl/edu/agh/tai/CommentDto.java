@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CommentDto {
 
 //    private final long user;
-//    private final LocalDateTime localDateTime;
     private final String content;
 
     @JsonCreator
@@ -18,6 +17,5 @@ public class CommentDto {
     public String getContent() {
         return content;
     }
-
 
 }

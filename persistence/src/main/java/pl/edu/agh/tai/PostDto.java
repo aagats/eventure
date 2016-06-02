@@ -7,7 +7,6 @@ public class PostDto {
 
     private final long event;
     //TODO: LocalDateTime
-//    private final LocalDateTime publishDate;
 //    private final long admin;
 
     @JsonCreator

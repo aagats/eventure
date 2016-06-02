@@ -2,6 +2,7 @@ package pl.edu.agh.tai;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ public class PostEntity {
     private long id;
     @OneToOne
     private EventEntity event;
-//    private LocalDateTime publishDate;
+    private LocalDateTime publishDate;
     @OneToMany
     private List<CommentEntity> comments;
 //    @OneToOne
@@ -21,8 +22,9 @@ public class PostEntity {
     public PostEntity() {
     }
 
-    public PostEntity(EventEntity event, List<CommentEntity> comments) {
+    public PostEntity(EventEntity event, LocalDateTime publishDate, List<CommentEntity> comments) {
         this.event = event;
+        this.publishDate = publishDate;
         this.comments = comments;
     }
 
@@ -33,4 +35,5 @@ public class PostEntity {
     public void setComments(List<CommentEntity> comments) {
         this.comments = comments;
     }
+
 }

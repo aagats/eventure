@@ -1,6 +1,7 @@
 package pl.edu.agh.tai;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -9,7 +10,7 @@ public class EventEntity {
     @GeneratedValue
     private long id;
     private String name;
-    //    private LocalDateTime date;
+    private LocalDateTime dateTime;
     private String hashtag;
     @ManyToOne
     private PlaceEntity location;
@@ -20,12 +21,14 @@ public class EventEntity {
     public EventEntity() {
     }
 
-    public EventEntity(String name, String hashtag, PlaceEntity location, Set<Category> categories, boolean tickets) {
+    public EventEntity(String name, LocalDateTime dateTime, String hashtag, PlaceEntity location, Set<Category> categories, boolean tickets) {
         this.name = name;
+        this.dateTime = dateTime;
         this.hashtag = hashtag;
         this.location = location;
         this.categories = categories;
         this.tickets = tickets;
     }
+
 }
 
