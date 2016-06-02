@@ -21,7 +21,16 @@ public class PostEntity {
     public PostEntity() {
     }
 
-    public PostEntity(EventEntity event) {
+    public PostEntity(EventEntity event, List<CommentEntity> comments) {
         this.event = event;
+        this.comments = comments;
+    }
+
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentEntity> comments) {
+        this.comments = comments;
     }
 }

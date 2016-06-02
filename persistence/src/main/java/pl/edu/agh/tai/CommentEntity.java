@@ -19,6 +19,9 @@ public class CommentEntity {
     @ManyToOne
     private PostEntity post;
 
+    public CommentEntity() {
+    }
+
     public CommentEntity(String content, PostEntity post) {
         this.content = content;
         this.post = post;
