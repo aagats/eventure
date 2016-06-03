@@ -45,7 +45,7 @@ define([
         },
 
         renderButton: function() {
-            this.$el.html("<button class='btn btn-large'><a href='login'>Login with Instagram</a></button>");
+            this.$el.html('<a href="login" class="btn btn-large btn-warning" role="button">Login with Instagram</a>');
         }
     });
     return MainPageView;
