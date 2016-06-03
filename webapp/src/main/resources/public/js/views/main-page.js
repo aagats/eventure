@@ -32,15 +32,13 @@ define([
         renderView: function(){
 
             this.$el.html(_.template(mainPageTemplate));
-            var postView;
 
             this.posts.each(function(post) {
-                postView = new PostView({
-                    el: this.$('.post-list'),
+                var postView = new PostView({
                     model: post,
                     item: true
                 });
-                postView.render();
+                this.$('.post-list').append(postView.render().el);
             });
         },
 

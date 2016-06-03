@@ -1,4 +1,4 @@
-package tai.controller;
+package pl.edu.agh.tai.controller;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

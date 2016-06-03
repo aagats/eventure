@@ -3,7 +3,7 @@ define([
     'underscore',
     'backbone',
     'text!templates/post.html',
-    'models/Post',
+    'models/post',
     'views/event-item',
     'views/event'
 ], function($, _, Backbone, postTemplate, Post, EventItemView, EventView){
@@ -14,7 +14,7 @@ define([
         },
 
         render: function() {
-            this.$el.append(_.template(postTemplate, {
+            this.$el.html(_.template(postTemplate, {
                 model: this.model
             }));
 
@@ -28,6 +28,7 @@ define([
             }
 
             eventView.render();
+            return this;
         }
         
     });
