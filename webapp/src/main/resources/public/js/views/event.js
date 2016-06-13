@@ -3,23 +3,21 @@ define([
     'underscore',
     'backbone',
     'text!templates/event.html',
-    'models/event'
-], function($, _, Backbone, eventTemplate, Event){
+    'models/event',
+    'models/user'
+], function($, _, Backbone, eventTemplate, Event, User){
     var EventView = Backbone.View.extend({
 
-        initialize: function() {
-            this.model = new Event({id: this.id});
+        events: {
+            'click .watch-button' : 'watchEvent'
         },
-
+        
         render: function() {
-            this.model.fetch()
-                .done(function() {
-                    if (this.model.get('hashtag') !== null) {
-                        $.get('/photos/' + this.model.get('hashtag'), this.renderView.bind(this));
-                    } else {
-                        this.renderView({});
-                    }
-                }.bind(this));
+            if (this.model.get('hashtag') !== null) {
+                $.get('/photos/' + this.model.get('hashtag'), this.renderView.bind(this));
+            } else {
+                this.renderView({});
+            }
         },
 
         renderView: function(instaData){
@@ -32,6 +30,17 @@ define([
                 model: this.model,
                 photos: instaData.data
             }));
+        },
+
+        renderWatchers: function() {
+            this.$('.watchers').append('<span class="label label-default">Ala</span>');
+            this.$('.watch-button').hide();
+        },
+
+        watchEvent: function() {
+            this.model.get('observators').add(new User({username: 'Ala'}));
+            this.model.save()
+                .done(this.renderWatchers.bind(this));
         }
     });
     return EventView;

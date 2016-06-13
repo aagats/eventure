@@ -3,22 +3,22 @@ define([
     'underscore',
     'backbone',
     'text!templates/main-page.html',
-    'views/event-item',
-    '../collections/events'
-], function($, _, Backbone, mainPageTemplate, EventItemView, Events){
+    'views/post',
+    'collections/posts'
+], function($, _, Backbone, mainPageTemplate, PostView, Posts){
     var MainPageView = Backbone.View.extend({
 
         initialize: function() {
-            this.events = new Events();
+            this.posts = new Posts();
         },
 
         render: function() {
 
-            $.get('/api/userauth', function(data) {
-                window.isAuth = data
+            $.get('/api/userauth', function(isAuth) {
+                window.isAuth = isAuth;
 
-                if (data) {
-                    this.events.fetch({
+                if (isAuth) {
+                    this.posts.fetch({
                         success: function (collection, response, options) {
                             this.renderView();
                         }.bind(this)
@@ -32,19 +32,18 @@ define([
         renderView: function(){
 
             this.$el.html(_.template(mainPageTemplate));
-            var eventView;
 
-            this.events.each(function(event) {
-                eventView = new EventItemView({
-                    el: this.$('.event-list'),
-                    model: event
+            this.posts.each(function(post) {
+                var postView = new PostView({
+                    model: post,
+                    item: true
                 });
-                eventView.render();
+                this.$('.post-list').append(postView.render().el);
             });
         },
 
         renderButton: function() {
-            this.$el.html("<button class='btn btn-large'><a href='login'>Login with Instagram</a></button>");
+            this.$el.html('<a href="login" class="btn btn-large btn-warning" role="button">Login with Instagram</a>');
         }
     });
     return MainPageView;

@@ -3,8 +3,9 @@ define([
     'underscore',
     'backbone',
     'models/place',
+    'models/user',
     'collections/users'
-], function($, _, Backbone, Place, Users) {
+], function($, _, Backbone, Place, User, Users) {
     var Event = Backbone.Model.extend({
         defaults: {
             'id': 0,
@@ -23,6 +24,12 @@ define([
 
         parse: function(data) {
             data.location = new Place(data.location);
+
+            var observators = new Users();
+            _.forEach(data.observators, function(observator) {
+                observators.add(new User({username: observator.username}));
+            }.bind(this));
+            data.observators = observators;
 
             return data;
         }

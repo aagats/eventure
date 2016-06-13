@@ -3,12 +3,12 @@ define([
     'underscore',
     'backbone',
     'views/main-page',
-    'views/login-page',
-    'views/event'
-], function ($, _, Backbone, MainPageView, LoginPageView, EventView) {
+    'views/post',
+    'models/post'
+], function ($, _, Backbone, MainPageView, PostView, Post) {
     var AppRouter = Backbone.Router.extend({
         routes: {
-            'events/:id': 'showEvent',
+            'posts/:id': 'showPost',
             '': 'mainPage'
         },
 
@@ -19,13 +19,17 @@ define([
             mainPageView.render();
         },
 
-        showEvent: function(id) {
-            var eventPageView = new EventView({
-                el: $('.main-container'),
-                id: id
-            });
-            eventPageView.render();
-            
+        showPost: function(id) {
+            var model = new Post({id: id});
+            model.fetch()
+                .done(function() {
+                    var postView = new PostView({
+                        el: $('.main-container'),
+                        model: model
+                    });
+                    $('.main-container').html('');
+                    postView.render();
+                });
         }
 
     });
