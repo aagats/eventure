@@ -13,7 +13,8 @@ define([
         },
         
         render: function() {
-            if (this.model.get('hashtag') !== null) {
+            var hashtag = this.model.get('hashtag');
+            if (hashtag !== null && hashtag !== "") {
                 $.get('/photos/' + this.model.get('hashtag'), this.renderView.bind(this));
             } else {
                 this.renderView({});

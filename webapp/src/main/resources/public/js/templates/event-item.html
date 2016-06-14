@@ -7,7 +7,7 @@
     </div>
 </div>
 <p class="lead">When: <%= model.get('date') ? model.get('date') : 'unknown' %> <br/>
-    Where: <%= model.get('location').get('name') %><br/>
+    Where: <%= model.get('location').get('name') %> - <%= model.get('location').get('city') %> - <%= model.get('location').get('street') %> - <%= model.get('location').get('buildingNumber') %><br/>
     Tickets? <%= model.get('tickets') ? 'yup' : 'nope' %>
 </p>
 <div class="photos">
