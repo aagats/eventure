@@ -4,15 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class DumbController {
 
-    @Autowired
-    private PlaceRepository placeRepository;
     @Autowired
     private EventRepository eventRepository;
     @Autowired
