@@ -19,6 +19,8 @@ public class DumbController {
     private PostRepository postRepository;
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping(path = "/healthcheck")
     public String lol() {
@@ -60,6 +62,11 @@ public class DumbController {
         post.setComments(comments);
         commentRepository.save(commentEntity);
         postRepository.save(post);
+    }
+
+    @RequestMapping(path = "/users", method = RequestMethod.POST)
+    public void createUser(@RequestBody UserDto user) {
+        userRepository.save(new UserEntity(user.getUsername(), user.getRole()));
     }
 
     private LocalDateTime parseStringToLocalDateTime(String dateTime) {

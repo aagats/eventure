@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PostDto {
 
     private final long event;
-    //TODO: LocalDateTime
 //    private final long admin;
 
     @JsonCreator
