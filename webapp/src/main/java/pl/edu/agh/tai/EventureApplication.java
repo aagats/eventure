@@ -27,7 +27,7 @@ public class EventureApplication extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/", "/login**", "/api/userauth")
+                .antMatchers("/", "/login**", "/api/userauth", "/css/**", "/js/**", "/img/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
