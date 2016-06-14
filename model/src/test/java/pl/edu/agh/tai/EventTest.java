@@ -32,7 +32,7 @@ public class EventTest {
         location = mock(Place.class);
         categories = new HashSet<>();
         categories.add(Category.ART);
-        event = new Event(456321, "watermelon", location, categories, true);
+        event = new Event("watermelon", location, categories, true);
         event.setObservators(observators);
     }
 

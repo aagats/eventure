@@ -26,6 +26,15 @@ public class Event {
         this.tickets = tickets;
     }
 
+    public Event(String name, LocalDateTime date, String hashtag, Place location, Set<Category> categories, boolean tickets) {
+        this.name = name;
+        this.date = date;
+        this.hashtag = hashtag;
+        this.location = location;
+        this.categories = categories;
+        this.tickets = tickets;
+    }
+
     public String getName() {
         return name;
     }

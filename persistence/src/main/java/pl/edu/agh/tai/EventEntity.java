@@ -30,5 +30,28 @@ public class EventEntity {
         this.tickets = tickets;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public String getHashtag() {
+        return hashtag;
+    }
+
+    public PlaceEntity getLocation() {
+        return location;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public boolean isTickets() {
+        return tickets;
+    }
 }
 

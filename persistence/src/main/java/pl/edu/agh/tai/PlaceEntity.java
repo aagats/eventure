@@ -23,4 +23,20 @@ public class PlaceEntity {
         this.street = street;
         this.buildingNumber = buildingNumber;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public int getBuildingNumber() {
+        return buildingNumber;
+    }
 }

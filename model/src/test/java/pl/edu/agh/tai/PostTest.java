@@ -30,7 +30,7 @@ public class PostTest {
         comments.add(comment1mock);
         comments.add(comment2mock);
         admin = mock(CustomUser.class);
-        post = new Post(event, publishDate, 345321, comments, admin);
+        post = new Post(event, publishDate, comments, admin);
     }
 
     @Test

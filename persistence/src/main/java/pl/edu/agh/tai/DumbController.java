@@ -27,21 +27,6 @@ public class DumbController {
         return "lol";
     }
 
-    @RequestMapping(path = "/places", method = RequestMethod.POST)
-    public void createPlacePlace(@RequestBody PlaceDto place) {
-        placeRepository.save(new PlaceEntity(place.getName(), place.getCity(), place.getStreet(), place.getBuildingNumber()));
-    }
-
-    @RequestMapping(path = "/events", method = RequestMethod.POST)
-    public void createEvent(@RequestBody EventDto event) {
-        long locationId = event.getLocation();
-        String dateTime = event.getDateTime();
-        LocalDateTime localDateTime = parseStringToLocalDateTime(dateTime);
-        //TODO: null pointer exc
-        PlaceEntity location = placeRepository.findOne(locationId);
-        eventRepository.save(new EventEntity(event.getName(), localDateTime, event.getHashtag(), location, event.getCategories(), event.hasTickets()));
-    }
-
     @RequestMapping(path = "/posts", method = RequestMethod.POST)
     public void createPost(@RequestBody PostDto post) {
         long eventId = post.getEvent();
@@ -69,9 +54,5 @@ public class DumbController {
         userRepository.save(new UserEntity(user.getUsername(), user.getRole()));
     }
 
-    private LocalDateTime parseStringToLocalDateTime(String dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(dateTime, formatter);
-    }
 
 }
