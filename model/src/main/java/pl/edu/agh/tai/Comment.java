@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 public class Comment {
 
-    private long id;
     private CustomUser author;
     private String content;
     private LocalDateTime time;
@@ -12,19 +11,10 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(long id, CustomUser author, String content, LocalDateTime time) {
-        this.id = id;
+    public Comment(CustomUser author, String content, LocalDateTime time) {
         this.author = author;
         this.content = content;
         this.time = time;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getContent() {

@@ -11,13 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import pl.edu.agh.tai.Category;
-import pl.edu.agh.tai.Event;
-import pl.edu.agh.tai.Place;
 
 import java.security.Principal;
-import java.util.HashSet;
-import java.util.Set;
 
 @RestController
 
@@ -41,17 +36,5 @@ public class EventController {
         HttpEntity<String> response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, entity, String.class);
 
         return response.getBody();
-    }
-
-    @RequestMapping("api/events/{id}")
-    public Event showEvent(@PathVariable(value = "id") int id){
-        Event event = new Event(id, "Juwenalia", new Place(1, "AGH", "Kraków", "MS", 0), null, false);
-        event.setHashtag("flowers");
-        Set<Category> categories = new HashSet<>();
-        categories.add(Category.PARTY);
-        categories.add(Category.MUSIC);
-        event.setCategories(categories);
-
-        return event;
     }
 }

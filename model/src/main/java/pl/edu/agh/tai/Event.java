@@ -8,7 +8,6 @@ import java.util.Set;
 
 public class Event {
 
-    private long id;
     private String name;
     private LocalDateTime date;
     private String hashtag;
@@ -20,20 +19,11 @@ public class Event {
     public Event() {
     }
 
-    public Event(long id, String name, Place location, Set<Category> categories, boolean tickets) {
-        this.id = id;
+    public Event(String name, Place location, Set<Category> categories, boolean tickets) {
         this.name = name;
         this.location = location;
         this.categories = categories;
         this.tickets = tickets;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

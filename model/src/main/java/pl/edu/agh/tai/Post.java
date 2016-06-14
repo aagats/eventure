@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Post {
 
-    private long id;
     private Event event;
     private LocalDateTime publishDate;
     private List<Comment> comments;
@@ -16,20 +15,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(Event event, LocalDateTime publishDate, long id, List<Comment> comments, User admin) {
+    public Post(Event event, LocalDateTime publishDate, List<Comment> comments, User admin) {
         this.event = event;
         this.publishDate = publishDate;
-        this.id = id;
         this.comments = comments;
         this.admin = admin;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Event getEvent() {

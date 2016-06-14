@@ -2,7 +2,6 @@ package pl.edu.agh.tai;
 
 public class Place {
 
-    private long id;
     private String name;
     private String city;
     private String street;
@@ -11,20 +10,11 @@ public class Place {
     public Place() {
     }
 
-    public Place(long id, String name, String city, String street, int buildingNumber) {
-        this.id = id;
+    public Place(String name, String city, String street, int buildingNumber) {
         this.name = name;
         this.city = city;
         this.street = street;
         this.buildingNumber = buildingNumber;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
