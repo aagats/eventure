@@ -1,11 +1,11 @@
-package tai.controller;
+package pl.edu.agh.tai.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.agh.tai.Place;
-import pl.edu.agh.tai.PlaceDto;
-import pl.edu.agh.tai.PlaceEntity;
-import pl.edu.agh.tai.PlaceRepository;
+import pl.edu.agh.tai.dtos.PlaceDto;
+import pl.edu.agh.tai.entities.PlaceEntity;
+import pl.edu.agh.tai.repositories.PlaceRepository;
 
 import java.util.ArrayList;
 import java.util.List;

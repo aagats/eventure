@@ -1,7 +1,6 @@
-package tai.controller;
+package pl.edu.agh.tai.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -11,7 +10,14 @@ import org.springframework.security.oauth2.provider.authentication.OAuth2Authent
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import pl.edu.agh.tai.*;
+import pl.edu.agh.tai.Event;
+import pl.edu.agh.tai.Place;
+import pl.edu.agh.tai.dtos.EventDto;
+import pl.edu.agh.tai.entities.EventEntity;
+import pl.edu.agh.tai.entities.PlaceEntity;
+import pl.edu.agh.tai.repositories.EventRepository;
+import pl.edu.agh.tai.repositories.PlaceRepository;
+
 
 import java.security.Principal;
 import java.time.LocalDateTime;

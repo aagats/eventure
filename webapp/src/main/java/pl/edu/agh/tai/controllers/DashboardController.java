@@ -1,4 +1,4 @@
-package tai.controller;
+package pl.edu.agh.tai.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
