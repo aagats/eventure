@@ -1,10 +1,7 @@
-package pl.edu.agh.tai;
-
-import org.springframework.security.core.userdetails.User;
+package pl.edu.agh.tai.model;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Event {
@@ -16,7 +13,7 @@ public class Event {
     private Place location;
     private Set<Category> categories;
     private boolean tickets;
-    private Set<User> observators = new HashSet<>();
+    private Set<CustomUser> observators = new HashSet<>();
 
     public Event() {
     }
@@ -85,19 +82,19 @@ public class Event {
         this.tickets = tickets;
     }
 
-    public Set<User> getObservators() {
+    public Set<CustomUser> getObservators() {
         return observators;
     }
 
-    public void setObservators(Set<User> observators) {
+    public void setObservators(Set<CustomUser> observators) {
         this.observators = observators;
     }
 
-    public void addObservator(User user) {
+    public void addObservator(CustomUser user) {
         observators.add(user);
     }
 
-    public void deleteObservator(User user) {
+    public void deleteObservator(CustomUser user) {
         observators.remove(user);
     }
 

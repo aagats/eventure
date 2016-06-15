@@ -1,4 +1,5 @@
-package pl.edu.agh.tai;
+package pl.edu.agh.tai.model;
+
 
 public class Place {
 
@@ -7,9 +8,6 @@ public class Place {
     private String city;
     private String street;
     private int buildingNumber;
-
-    public Place() {
-    }
 
     public Place(long id, String name, String city, String street, int buildingNumber) {
         this.id = id;

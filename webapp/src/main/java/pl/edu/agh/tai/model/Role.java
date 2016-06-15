@@ -1,4 +1,4 @@
-package pl.edu.agh.tai;
+package pl.edu.agh.tai.model;
 
 import org.springframework.security.core.GrantedAuthority;
 

@@ -4,8 +4,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import pl.edu.agh.tai.*;
+import pl.edu.agh.tai.model.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class EventController {
 
     @RequestMapping(path = "/api/events/{id}", method = RequestMethod.PUT)
     public Event addObservator(@PathVariable(value = "id") int id, Principal principal) {
-        event.addObservator(new CustomUser("Ala", "pass", new ArrayList<Role>()));
+        event.addObservator(new CustomUser("Ala", "pass", AuthorityUtils.createAuthorityList("ROLE_USER")));
 
         return event;
     }
