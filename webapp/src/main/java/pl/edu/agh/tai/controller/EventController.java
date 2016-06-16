@@ -15,10 +15,12 @@ import pl.edu.agh.tai.model.Event;
 import pl.edu.agh.tai.model.Place;
 import pl.edu.agh.tai.persistence.EventRepository;
 import pl.edu.agh.tai.persistence.PlaceRepository;
+import pl.edu.agh.tai.persistence.PostRepository;
 import pl.edu.agh.tai.persistence.UserRepository;
 import pl.edu.agh.tai.persistence.dtos.EventDto;
 import pl.edu.agh.tai.persistence.entitites.EventEntity;
 import pl.edu.agh.tai.persistence.entitites.PlaceEntity;
+import pl.edu.agh.tai.persistence.entitites.PostEntity;
 import pl.edu.agh.tai.persistence.entitites.UserEntity;
 
 import java.security.Principal;
@@ -26,6 +28,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 
@@ -37,6 +40,8 @@ public class EventController {
     EventRepository eventRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PostRepository postRepository;
 
     @RequestMapping("photos/{tag}")
     public String getPhotosFromTag(@PathVariable(value = "tag") String tag, Principal principal) {
@@ -69,7 +74,7 @@ public class EventController {
     }
 
     @RequestMapping(path = "api/events", method = RequestMethod.GET)
-    public List<Event> showTasks() {
+    public List<Event> showEvents() {
         Iterable<EventEntity> eventRepositoryAll = eventRepository.findAll();
         List<Event> events = new ArrayList<>();
         for (EventEntity eventEntity : eventRepositoryAll) {
@@ -97,6 +102,17 @@ public class EventController {
         eventEntity.getObservators().add(userEntity);
         eventRepository.save(eventEntity);
         return username;
+    }
+
+    @RequestMapping(path = "api/watches", method = RequestMethod.GET)
+    public List<PostEntity> showWatches(Principal principal) {
+        UserEntity user = userRepository.findByUsername(EventureApplication.getPrincipalUsername(principal));
+        List<EventEntity> watches = eventRepository.findByObservators(user);
+        List<PostEntity> posts = new ArrayList<>();
+        for (EventEntity event : watches) {
+            posts.add(postRepository.findByEvent(event));
+        }
+        return posts;
     }
 
     private LocalDateTime parseStringToLocalDateTime(String dateTime) {
