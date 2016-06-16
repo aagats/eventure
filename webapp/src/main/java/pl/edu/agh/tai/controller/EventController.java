@@ -1,41 +1,42 @@
 package pl.edu.agh.tai.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import pl.edu.agh.tai.model.*;
+import pl.edu.agh.tai.EventureApplication;
+import pl.edu.agh.tai.model.Event;
+import pl.edu.agh.tai.model.Place;
+import pl.edu.agh.tai.persistence.EventRepository;
+import pl.edu.agh.tai.persistence.PlaceRepository;
+import pl.edu.agh.tai.persistence.UserRepository;
+import pl.edu.agh.tai.persistence.dtos.EventDto;
+import pl.edu.agh.tai.persistence.entitites.EventEntity;
+import pl.edu.agh.tai.persistence.entitites.PlaceEntity;
+import pl.edu.agh.tai.persistence.entitites.UserEntity;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 
 public class EventController {
 
-    private Event event = new Event(1, "Juwenalia", new Place(1, "AGH", "Kraków", "MS", 0), null, false);
-
-    @RequestMapping("api/events/{id}")
-    public Event showEvent(@PathVariable(value = "id") int id){
-        event.setHashtag("flowers");
-        Set<Category> categories = new HashSet<>();
-        categories.add(Category.PARTY);
-        categories.add(Category.MUSIC);
-        event.setCategories(categories);
-
-        return event;
-    }
+    @Autowired
+    PlaceRepository placeRepository;
+    @Autowired
+    EventRepository eventRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @RequestMapping("photos/{tag}")
     public String getPhotosFromTag(@PathVariable(value = "tag") String tag, Principal principal) {
@@ -57,10 +58,49 @@ public class EventController {
         return response.getBody();
     }
 
-    @RequestMapping(path = "/api/events/{id}", method = RequestMethod.PUT)
-    public Event addObservator(@PathVariable(value = "id") int id, Principal principal) {
-        event.addObservator(new CustomUser("Ala", "pass", AuthorityUtils.createAuthorityList("ROLE_USER")));
+    @RequestMapping(path = "api/events", method = RequestMethod.POST)
+    public EventEntity createEvent(@RequestBody EventDto event) {
+        long locationId = event.getLocation();
+        String dateTime = event.getDateTime();
+        LocalDateTime localDateTime = parseStringToLocalDateTime(dateTime);
+        //TODO: null pointer exc
+        PlaceEntity location = placeRepository.findOne(locationId);
+        return eventRepository.save(new EventEntity(event.getName(), localDateTime, event.getHashtag(), location, event.getCategories(), event.hasTickets()));
+    }
 
-        return event;
+    @RequestMapping(path = "api/events", method = RequestMethod.GET)
+    public List<Event> showTasks() {
+        Iterable<EventEntity> eventRepositoryAll = eventRepository.findAll();
+        List<Event> events = new ArrayList<>();
+        for (EventEntity eventEntity : eventRepositoryAll) {
+            PlaceEntity placeEntity = eventEntity.getLocation();
+            Place place = new Place(placeEntity.getId(), placeEntity.getName(), placeEntity.getCity(), placeEntity.getStreet(), placeEntity.getBuildingNumber());
+            events.add(new Event(eventEntity.getId(), eventEntity.getName(), eventEntity.getDateTime(), eventEntity.getHashtag(), place, eventEntity.getCategories(), eventEntity.isTickets()));
+        }
+        return events;
+    }
+
+    @RequestMapping(path = "api/events/{id}", method = RequestMethod.GET)
+    public Event getEvent(@PathVariable(value = "id") long id) {
+        //TODO: null pointer exception
+        EventEntity eventEntity = eventRepository.findOne(id);
+        PlaceEntity placeEntity = eventEntity.getLocation();
+        Place place = new Place(placeEntity.getId(), placeEntity.getName(), placeEntity.getCity(), placeEntity.getStreet(), placeEntity.getBuildingNumber());
+        return new Event(eventEntity.getId(), eventEntity.getName(), eventEntity.getDateTime(), eventEntity.getHashtag(), place, eventEntity.getCategories(), eventEntity.isTickets());
+    }
+
+    @RequestMapping(path ="api/events/{id}/watch", method = RequestMethod.POST)
+    public String watchEvent(@PathVariable(value = "id") long id, Principal principal) {
+        EventEntity eventEntity = eventRepository.findOne(id);
+        String username = EventureApplication.getPrincipalUsername(principal);
+        UserEntity userEntity = userRepository.findByUsername(username);
+        eventEntity.getObservators().add(userEntity);
+        eventRepository.save(eventEntity);
+        return username;
+    }
+
+    private LocalDateTime parseStringToLocalDateTime(String dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(dateTime, formatter);
     }
 }

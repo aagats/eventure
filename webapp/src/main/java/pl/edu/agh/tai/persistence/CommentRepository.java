@@ -9,7 +9,7 @@ import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @Transactional
-public interface CommentDao extends CrudRepository<CommentEntity, Long> {
+public interface CommentRepository extends CrudRepository<CommentEntity, Long> {
 
     List<Comment> findByAuthor(CustomUser author);
 }

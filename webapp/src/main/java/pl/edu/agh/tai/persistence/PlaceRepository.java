@@ -1,11 +1,10 @@
 package pl.edu.agh.tai.persistence;
 
 import org.springframework.data.repository.CrudRepository;
-import pl.edu.agh.tai.persistence.entitites.EventEntity;
+import pl.edu.agh.tai.persistence.entitites.PlaceEntity;
 
 import javax.transaction.Transactional;
 
 @Transactional
-public interface EventDao extends CrudRepository<EventEntity, Long> {
-
+public interface PlaceRepository extends CrudRepository<PlaceEntity, Long> {
 }

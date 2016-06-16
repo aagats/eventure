@@ -11,6 +11,10 @@ define([
         events: {
             'click .watch-button' : 'watchEvent'
         },
+
+        initialize: function() {
+            this.listenTo(this.model.get('observators'), 'add', this.renderWatchers.bind(this));
+        },
         
         render: function() {
             var hashtag = this.model.get('hashtag');
@@ -31,17 +35,34 @@ define([
                 model: this.model,
                 photos: instaData.data
             }));
+            if (this.isWatching()) {
+                this.$('.watch-button').hide();
+            }
         },
 
         renderWatchers: function() {
-            this.$('.watchers').append('<span class="label label-default">Ala</span>');
-            this.$('.watch-button').hide();
+            var toAppend = '',
+                observators = this.model.get('observators');
+
+            observators.each(function(observator) {
+               toAppend +=  '<span class="label label-default">' + observator.get('username') + '</span>'
+            });
+
+            this.$('.watchers').html(toAppend);
         },
 
         watchEvent: function() {
-            this.model.get('observators').add(new User({username: 'Ala'}));
-            this.model.save()
-                .done(this.renderWatchers.bind(this));
+            $.post(this.model.watchUrl(), function (username) {
+                this.$('.watch-button').hide();
+                this.model.get('observators').add(new User({username: username}));
+            }.bind(this));
+        },
+
+        isWatching: function() {
+            var filtered = this.model.get('observators').filter(function(observator) {
+                if (observator.get('username') === window.user) return true;
+            });
+            return filtered.length === 1;
         }
     });
     return EventView;

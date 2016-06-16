@@ -3,7 +3,6 @@ package pl.edu.agh.tai.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.userdetails.User;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 

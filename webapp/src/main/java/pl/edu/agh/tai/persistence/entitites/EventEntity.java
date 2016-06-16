@@ -1,5 +1,7 @@
 package pl.edu.agh.tai.persistence.entitites;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import pl.edu.agh.tai.DateTimeSerializer;
 import pl.edu.agh.tai.model.Category;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ public class EventEntity {
     @GeneratedValue
     private long id;
     private String name;
+    @JsonSerialize(using = DateTimeSerializer.class)
     private LocalDateTime dateTime;
     private String hashtag;
     @ManyToOne
@@ -19,7 +22,7 @@ public class EventEntity {
     @ElementCollection(targetClass = Category.class)
     private Set<Category> categories;
     private boolean tickets;
-    @OneToMany
+    @ManyToMany
     private Set<UserEntity> observators;
 
     public EventEntity() {
@@ -60,6 +63,10 @@ public class EventEntity {
 
     public Set<UserEntity> getObservators() {
         return observators;
+    }
+
+    public long getId() {
+        return id;
     }
 }
 

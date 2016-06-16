@@ -18,9 +18,11 @@ public class Event {
     public Event() {
     }
 
-    public Event(long id, String name, Place location, Set<Category> categories, boolean tickets) {
-        this.id = id;
+    public Event(long id, String name, LocalDateTime date, String hashtag, Place location, Set<Category> categories, boolean tickets) {
+        this.id= id;
         this.name = name;
+        this.date = date;
+        this.hashtag = hashtag;
         this.location = location;
         this.categories = categories;
         this.tickets = tickets;

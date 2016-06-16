@@ -6,7 +6,7 @@
         <h3 class="tag">#<%=model.get('hashtag')%></h3>
     </div>
 </div>
-<p class="lead">When: <%= model.get('date') ? model.get('date') : 'unknown' %> <br/>
+<p class="lead">When: <%= model.get('dateTime') ? model.get('dateTime') : 'unknown' %> <br/>
     Where: <%= model.get('location').get('name') %> - <%= model.get('location').get('city') %> - <%= model.get('location').get('street') %> - <%= model.get('location').get('buildingNumber') %><br/>
     Tickets? <%= model.get('tickets') ? 'yes' : 'no' %>
 </p>

@@ -8,15 +8,12 @@ define([
 ], function($, _, Backbone, Place, User, Event) {
     var Post = Backbone.Model.extend({
         defaults: {
-            'id': 0,
             'event': new Event(),
             'publishDate': '',
             'comments': null
         },
 
-        url: function() {
-            return '/api/posts/' + this.get('id');
-        },
+        urlRoot: '/api/posts',
 
         parse: function(data) {
             data.event = new Event(Event.prototype.parse(data.event));

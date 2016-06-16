@@ -8,9 +8,8 @@ define([
 ], function($, _, Backbone, Place, User, Users) {
     var Event = Backbone.Model.extend({
         defaults: {
-            'id': 0,
             'name': '',
-            'date': '',
+            'dateTime': '',
             'hashtag': '',
             'location': new Place(),
             'categories': [],
@@ -18,8 +17,9 @@ define([
             'observators': new Users()
         },
         
-        url: function() {
-            return '/api/events/' + this.get('id');
+        urlRoot:  '/api/events',
+        watchUrl: function() {
+            return '/api/events/' + this.get('id') + '/watch'
         },
 
         parse: function(data) {
@@ -33,6 +33,7 @@ define([
 
             return data;
         }
+        
     });
 
     return Event;

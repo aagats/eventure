@@ -14,8 +14,31 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public UserEntity() {
+    }
+
     public UserEntity(String username, Role role) {
         this.username = username;
         this.role = role;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public long getId() {
+        return id;
     }
 }

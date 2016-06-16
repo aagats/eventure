@@ -1,39 +1,47 @@
 package pl.edu.agh.tai.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import pl.edu.agh.tai.model.Event;
-import pl.edu.agh.tai.model.Place;
-import pl.edu.agh.tai.model.Post;
-import pl.edu.agh.tai.persistence.PostDao;
+import org.springframework.web.bind.annotation.*;
+import pl.edu.agh.tai.EventureApplication;
+import pl.edu.agh.tai.persistence.EventRepository;
+import pl.edu.agh.tai.persistence.PostRepository;
+import pl.edu.agh.tai.persistence.UserRepository;
 import pl.edu.agh.tai.persistence.dtos.PostDto;
+import pl.edu.agh.tai.persistence.entitites.EventEntity;
 import pl.edu.agh.tai.persistence.entitites.PostEntity;
+import pl.edu.agh.tai.persistence.entitites.UserEntity;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.security.Principal;
+import java.time.LocalDateTime;
 
 @RestController
 public class PostController {
 
     @Autowired
-    private PostDao postDao;
+    private PostRepository postRepository;
+    @Autowired
+    private EventRepository eventRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping(path="api/posts/{id}", method = RequestMethod.GET)
-    public Post showPost(@PathVariable(value="id") long id) {
-        return null;
+    public PostEntity showPost(@PathVariable(value="id") long id) {
+        return postRepository.findOne(id);
     }
 
     @RequestMapping(path="api/posts", method = RequestMethod.GET)
-    public List<Post> showPosts() throws IOException {
-        return null;
+    public Iterable<PostEntity> showPosts() throws IOException {
+        return postRepository.findAll();
     }
 
     @RequestMapping(path ="api/posts", method = RequestMethod.POST)
-    public Post addPost(PostDto post) {
-        return null;
+    public PostEntity addPost(@RequestBody PostDto post, Principal principal) {
+        long eventId = post.getEvent();
+        String username = EventureApplication.getPrincipalUsername(principal);
+        EventEntity eventEntity = eventRepository.findOne(eventId);
+        UserEntity userEntity = userRepository.findByUsername(username);
+        return postRepository.save(new PostEntity(eventEntity, LocalDateTime.now(), userEntity));
     }
+
 }
