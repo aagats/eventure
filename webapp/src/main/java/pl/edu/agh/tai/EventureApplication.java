@@ -1,5 +1,6 @@
 package pl.edu.agh.tai;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -23,6 +24,9 @@ public class EventureApplication extends WebSecurityConfigurerAdapter {
 		SpringApplication.run(EventureApplication.class, args);
 	}
 
+    @Autowired
+    AuthenticationSuccessHandlerImpl successHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -33,6 +37,9 @@ public class EventureApplication extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated();
+//                .and()
+//                .formLogin()
+//                .successHandler(successHandler);
     }
 
     @RequestMapping(path = "/api/userauth")
