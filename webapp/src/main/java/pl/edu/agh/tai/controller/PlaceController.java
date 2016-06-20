@@ -1,6 +1,7 @@
 package pl.edu.agh.tai.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.agh.tai.model.Place;
 import pl.edu.agh.tai.persistence.PlaceRepository;
@@ -16,6 +17,7 @@ public class PlaceController {
     @Autowired
     private PlaceRepository placeRepository;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(path = "api/places", method = RequestMethod.POST)
     public void createPlace(@RequestBody PlaceDto place) {
         placeRepository.save(new PlaceEntity(place.getName(), place.getCity(), place.getStreet(), place.getBuildingNumber()));

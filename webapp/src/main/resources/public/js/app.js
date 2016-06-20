@@ -2,9 +2,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'router',
-    'bootstrap'
-], function ($, _, Backbone, AppRouter, Bootstrap) {
+    'router'
+], function ($, _, Backbone, AppRouter) {
     var App = {
         initialize: function () {
             var router = new AppRouter();

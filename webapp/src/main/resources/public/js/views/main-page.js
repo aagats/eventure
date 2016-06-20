@@ -4,13 +4,15 @@ define([
     'backbone',
     'text!templates/main-page.html',
     'text!templates/new-post.html',
+    'text!templates/place-form.html',
     'views/post',
     'collections/posts',
     'collections/places',
     'models/place',
     'models/post',
-    'models/event'
-], function($, _, Backbone, mainPageTemplate, newPostTemplate, PostView, Posts, Places, Place, Post, Event){
+    'models/event',
+    'bootstrap'
+], function($, _, Backbone, mainPageTemplate, newPostTemplate, placeFormTemplate, PostView, Posts, Places, Place, Post, Event){
     var MainPageView = Backbone.View.extend({
 
         initialize: function() {
@@ -19,15 +21,17 @@ define([
 
         events: {
             'click .add-event': 'renderEventForm',
-            'click .submit-event': 'addEvent'
+            'click .submit-event': 'addEvent',
+            'click .new-place': 'renderPlaceForm'
         },
 
         render: function() {
-
             $.get('/api/userauth', function(isAuth) {
-                window.user = isAuth;
-
                 if (isAuth !== '') {
+                    if (!window.user) {
+                        window.user = isAuth.username;
+                        this.isAdmin = (isAuth.role == 'ADMIN');
+                    }
                     if(this.posts.models.length === 0) {
                         this.posts.fetch({
                             success: function (collection, response, options) {
@@ -45,7 +49,9 @@ define([
 
         renderView: function(){
 
-            this.$el.html(_.template(mainPageTemplate));
+            this.$el.html(_.template(mainPageTemplate, {
+                isAdmin: this.isAdmin
+            }));
 
             this.posts.each(function(post) {
                 var postView = new PostView({
@@ -103,6 +109,11 @@ define([
             } else {
                 alert("Provide at least name and city.");
             }
+        },
+
+        renderPlaceForm: function() {
+            this.$('#place-modal').modal('show');
+
         }
     });
     return MainPageView;

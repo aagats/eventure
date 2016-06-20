@@ -4,7 +4,10 @@ require.config({
         underscore: 'vendor/lodash',
         backbone: 'vendor/backbone.min',
         text: 'vendor/plugins/text',
-        bootstrap: '//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'
+        bootstrap: 'vendor/bootstrap.min'
+    },
+    shim: {
+        bootstrap: {deps : ['jquery'], exports: '$'}
     }
 
 });

@@ -1,6 +1,7 @@
 package pl.edu.agh.tai.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.agh.tai.EventureApplication;
 import pl.edu.agh.tai.persistence.EventRepository;
@@ -35,6 +36,7 @@ public class PostController {
         return postRepository.findAll();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(path ="api/posts", method = RequestMethod.POST)
     public PostEntity addPost(@RequestBody PostDto post, Principal principal) {
         long eventId = post.getEvent();
