@@ -10,8 +10,7 @@ define([
     'collections/places',
     'models/place',
     'models/post',
-    'models/event',
-    'bootstrap'
+    'models/event'
 ], function($, _, Backbone, mainPageTemplate, newPostTemplate, placeFormTemplate, PostView, Posts, Places, Place, Post, Event){
     var MainPageView = Backbone.View.extend({
 
@@ -22,7 +21,8 @@ define([
         events: {
             'click .add-event': 'renderEventForm',
             'click .submit-event': 'addEvent',
-            'click .new-place': 'renderPlaceForm'
+            'click .hide-form': 'renderView',
+            'click .submit-place': 'addPlace'
         },
 
         render: function() {
@@ -81,7 +81,7 @@ define([
 
         addEvent: function (e) {
             e.preventDefault();
-            var form = this.$('form');
+            var form = this.$('form.new-post');
 
             if (form[0].checkValidity()) {
                 var data = form.serializeArray();
@@ -91,6 +91,7 @@ define([
                     event[field.name] = field.value;
                 });
 
+                event.dateTime = event.dateTime.replace('T', ' ');
                 event.location = this.$('select').val();
                 event.tickets = (event.tickets !== undefined);
                 var eventModel = new Event();
@@ -111,9 +112,19 @@ define([
             }
         },
 
-        renderPlaceForm: function() {
-            this.$('#place-modal').modal('show');
-
+        addPlace: function() {
+            var place = new Place({
+                name: this.$('input[name="location.name"]').val(),
+                city: this.$('input[name="location.city"]').val(),
+                street: this.$('input[name="location.street"]').val(),
+                buildingNumber: this.$('input[name="location.buildingNumber"]').val()
+            });
+            place.save()
+                .done(function() {
+                   this.places.add(place);
+                    this.$('select').append('<option value="' + place.get('id') + '">' + place.get('name') + ' - ' + place.get('city')+ '</option>');
+                    this.$('#place-modal').modal('hide');
+                }.bind(this));
         }
     });
     return MainPageView;

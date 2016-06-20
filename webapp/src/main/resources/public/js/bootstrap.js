@@ -3,11 +3,7 @@ require.config({
         jquery: 'vendor/jquery-1.10.2.min',
         underscore: 'vendor/lodash',
         backbone: 'vendor/backbone.min',
-        text: 'vendor/plugins/text',
-        bootstrap: 'vendor/bootstrap.min'
-    },
-    shim: {
-        bootstrap: {deps : ['jquery'], exports: '$'}
+        text: 'vendor/plugins/text'
     }
 
 });

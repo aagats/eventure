@@ -19,8 +19,8 @@ public class PlaceController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(path = "api/places", method = RequestMethod.POST)
-    public void createPlace(@RequestBody PlaceDto place) {
-        placeRepository.save(new PlaceEntity(place.getName(), place.getCity(), place.getStreet(), place.getBuildingNumber()));
+    public PlaceEntity createPlace(@RequestBody PlaceDto place) {
+        return placeRepository.save(new PlaceEntity(place.getName(), place.getCity(), place.getStreet(), place.getBuildingNumber()));
     }
 
     @RequestMapping(path = "api/places", method = RequestMethod.GET)

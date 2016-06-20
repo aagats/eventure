@@ -25,9 +25,6 @@ public class EventureApplication extends WebSecurityConfigurerAdapter {
 		SpringApplication.run(EventureApplication.class, args);
 	}
 
-    @Autowired
-    AuthenticationSuccessHandlerImpl successHandler;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -38,9 +35,6 @@ public class EventureApplication extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated();
-//                .and()
-//                .formLogin()
-//                .successHandler(successHandler);
     }
 
     public static String getPrincipalUsername(Principal principal) {
