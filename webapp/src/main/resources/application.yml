@@ -13,7 +13,7 @@ security:
 
 spring:
   datasource:
-    url: jdbc:postgresql://rxjgvggtywqrdx:3aKQbRlbd5_fqvZCekTZZ5HtBH@ec2-54-243-248-181.compute-1.amazonaws.com:5432/d6iuei50b94ah9
+    url: ${JDBC_DATABASE_URL}
     username: rxjgvggtywqrdx
     password: 3aKQbRlbd5_fqvZCekTZZ5HtBH
     testWhileIdle: true
