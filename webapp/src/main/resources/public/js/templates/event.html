@@ -1,15 +1,19 @@
 <div class="row">
-    <div class="col-md-6">
-        <h1 class="event-name"><%= model.get('name') %></h1>
-    </div>
-    <div class="col-md-6">
-        <h3 class="tag">#<%=model.get('hashtag')%></h3>
+    <div class="col-md-12">
+        <h1 class="event-name header"><%= model.get('name') %></h1>
     </div>
 </div>
-<p class="lead">When: <%= model.get('dateTime') ? model.get('dateTime') : 'unknown' %> <br/>
-    Where: <%= model.get('location').get('name') %> - <%= model.get('location').get('city') %> - <%= model.get('location').get('street') %> - <%= model.get('location').get('buildingNumber') %><br/>
-    Tickets? <%= model.get('tickets') ? 'yes' : 'no' %>
-</p>
+<div class="row">
+    <div class="col-md-8">
+        When: <span class="label label-default"><%= model.get('dateTime') ? model.get('dateTime') : 'unknown' %></span> <br/>
+        Where: <span class="label label-default"><%= model.get('location').get('name') %> - <%= model.get('location').get('city') %> - <%= model.get('location').get('street') %> - <%= model.get('location').get('buildingNumber') %></span><br/>
+        Tickets? <span class="label label-default"><%= model.get('tickets') ? 'yes' : 'no' %></span>
+    </div>
+
+    <div class="col-md-3">
+        <span class="label label-info tag pull-right">#<%=model.get('hashtag')%></span>
+    </div>
+</div>
 <div class="photos">
     <% if (_.isEmpty(photos)) { %>
     There are no photos for this event.

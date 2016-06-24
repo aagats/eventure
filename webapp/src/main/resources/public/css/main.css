@@ -5,6 +5,7 @@
 body {
     padding-top: 20px;
     padding-bottom: 20px;
+    font-family: 'Open Sans', sans-serif !important;
 }
 
 .header,
@@ -77,14 +78,29 @@ body {
 
 .jumbotron h1.event-name {
     color: #74065d;
-    font-size: 45px;
+    font-size: 35px;
+    margin-top: -10px;
 }
 
-.jumbotron h3.tag {
-    text-align: center;
-    vertical-align: middle;
+.tag {
+    font-size: 3em !important;
 }
 
 .new-post {
     width: 40%;
+}
+
+a.btn.btn-large.btn-warning.center-block.login-btn {
+    width: 200px;
+    height: 80px;
+    vertical-align: middle;
+    padding-top: 30px;
+}
+
+.post-list {
+    margin-top: 10px;
+}
+
+.post {
+    border: 3px solid #3299BB;
 }

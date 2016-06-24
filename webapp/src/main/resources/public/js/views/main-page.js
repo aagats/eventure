@@ -30,7 +30,7 @@ define([
                 if (isAuth !== '') {
                     if (!window.user) {
                         window.user = isAuth.username;
-                        this.isAdmin = (isAuth.role == 'ADMIN');
+                        window.isAdmin = (isAuth.role == 'ADMIN');
                     }
                     if(this.posts.models.length === 0) {
                         this.posts.fetch({
@@ -49,9 +49,7 @@ define([
 
         renderView: function(){
 
-            this.$el.html(_.template(mainPageTemplate, {
-                isAdmin: this.isAdmin
-            }));
+            this.$el.html(_.template(mainPageTemplate));
 
             this.posts.each(function(post) {
                 var postView = new PostView({
@@ -63,7 +61,7 @@ define([
         },
 
         renderButton: function() {
-            this.$el.html('<a href="login" class="btn btn-large btn-warning" role="button">Login with Instagram</a>');
+            this.$el.html('<a href="login" class="btn btn-large btn-warning center-block login-btn" role="button">Login with Instagram</a>');
         },
 
         renderEventForm: function() {
