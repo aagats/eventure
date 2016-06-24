@@ -11,11 +11,16 @@ security:
         resource:
             userInfoUri: https://api.instagram.com/v1/users/self
 
+server:
+  error:
+    whitelabel:
+      enabled: false
+
 spring:
   datasource:
-    url: ${JDBC_DATABASE_URL}
-    username: rxjgvggtywqrdx
-    password: 3aKQbRlbd5_fqvZCekTZZ5HtBH
+    url: jdbc:postgresql://localhost:5432/eventure
+    username: postgres
+    password: pass
     testWhileIdle: true
     validationQuery: SELECT 1
     driverClassName: org.postgresql.Driver
